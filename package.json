@@ -1,5 +1,19 @@
 {
   "name": "hexagonalConsultingTest",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.8.2",
+    "@rails/webpacker": "^4.0.2",
+    "bootstrap": "^4.3.1",
+    "core-js": "3",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.4.1",
+    "popper.js": "^1.15.0",
+    "rails-erb-loader": "^5.5.2",
+    "rails-ujs": "^5.2.3",
+    "turbolinks": "^5.2.0"
+  },
+  "devDependencies": {
+    "webpack-dev-server": "^3.4.1"
+  }
 }

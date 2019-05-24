@@ -19,15 +19,23 @@ The app should be hosted on a free Heroku hosting plan.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+On dev:
+
+```
+rails s
+ruby ./bin/webpack-dev-server
+```
 
 ### Prerequisites
 
-This program uses :
+Created using :
 
 ```
 Ruby 2.6.3
 Rails 5.2.3
+Webpacker 4.0
+PostgreSQL 9.4.1
+yarn 1.16.0
 ```
 
 ### Installing
@@ -78,9 +86,9 @@ Add additional notes about how to deploy this on a live system
 * [Maven](https://maven.apache.org/) - Dependency Management
 * [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 
-## Contributing
+## Resources
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+* Installing Webpack : https://medium.com/@coorasse/goodbye-sprockets-welcome-webpacker-3-0-ff877fb8fa79
 
 ## Versioning
 
