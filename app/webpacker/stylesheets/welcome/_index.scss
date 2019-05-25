@@ -1,0 +1,39 @@
+.home-cntnr {
+  background-image: url('./../images/home-background.jpg');
+  background-position: 0px 0px;
+  background-repeat: no-repeat;
+	background-position: center center;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+  height: 20em;
+  margin: 0;
+  text-align: center;
+
+  h1{
+    color: white;
+    padding-top: 1em;
+    font-size: 4em;
+  }
+
+  h3{
+    color: rgba(254,254,254,.7);
+    font-size: 1.4em;
+    font-weight: lighter;
+  }
+
+  .cta-btn{
+    list-style-type: none;
+
+    a {
+      color: white;
+      background: $blue_green;
+      padding-left: 1em;
+      padding-right: 1em;
+      width: 10em;
+      margin: auto;
+      margin-top: 1em;
+    }
+  }
+}

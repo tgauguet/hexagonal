@@ -4,3 +4,41 @@
 $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import '~@fortawesome/fontawesome-free/scss/fontawesome';
 @import '~@fortawesome/fontawesome-free/scss/solid';
+@import 'devise/registrations/new';
+@import 'welcome/index';
+
+header {
+  .header-logo {
+    width: 2em;
+    margin-right: .4em;
+  }
+
+  .navbar-brand, .nav-link {
+    color: white;
+  }
+
+  .navbar-nav {
+    li {
+      a:hover {
+        color: white;
+      }
+    }
+
+    li:last-of-type{
+      right: 2em;
+      position: absolute;
+      width: 10em;
+
+      a {
+        padding-left: 1em;
+        padding-right: 1em;
+        text-align: center;
+        background: $blue_green;
+      }
+    }
+  }
+
+  .navbar {
+    background: $blue;
+  }
+}

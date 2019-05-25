@@ -1,4 +1,3 @@
-// import './image1.svg'
-// import './image2.png'
-// import './image3.jpg'
-// import './icon.png'
+import './logo.jpg'
+import './logo-white.png'
+import './home-background.jpg'
