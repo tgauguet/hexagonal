@@ -7,6 +7,8 @@ ruby '2.6.3'
 gem 'rails', '~> 5.2.3'
 # Use pgSQL as the database for Active Record
 gem 'pg'
+# Use devise for authentication
+gem 'devise'
 # Use webpacker
 gem 'webpacker', '~> 4.0'
 # Use Puma as the app server
