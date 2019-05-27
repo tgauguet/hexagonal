@@ -6,7 +6,8 @@ class ApplicationMailer < ActionMailer::Base
     base_url = Rails.env.development? ? 'http://localhost:3000' : 'https://hexagonal-consulting.herokuapp.com'
     @btn_url = "#{base_url}/users/#{user.id}/reconfirm"
     @user = user
+    @position = @user.request.current_position
 
-    mail(to: user.email, subject: 'Are you still interested to join us ?')
+    mail(to: user.email, subject: 'Still want to join us ?')
   end
 end

@@ -1,10 +1,11 @@
 class Request < ApplicationRecord
   belongs_to :user
   validates_presence_of :user_id, :status, on: :create
+  validates :status, inclusion: { in: %w( pending confirmed accepted expired ) }
 
   # not allowed in the waiting list
   scope :first_come_first_served, -> { order('created_at ASC') }
-  scope :unconfirmed, -> { where(status: 'pending confirmation') }
+  scope :unconfirmed, -> { where(status: 'pending') }
   scope :confirmed, -> { where(status: 'confirmed') }
   scope :accepted, -> { where(status: 'accepted') }
   scope :expired, -> { where(status: 'expired') }
@@ -36,9 +37,15 @@ class Request < ApplicationRecord
     Request.overtimed_confirmation.update_all(status: "expired")
   end
 
+  def current_position
+    ids_list = Request.confirmed
+                      .map(&:user_id)
+                      .index(self.user_id) + 1
+  end
+
   # accept an existing request
-  def accept!(id)
-    Request.find_by_id(id).update(status: 'accepted')
+  def accept!
+    self.update(status: 'accepted')
   end
 
 end
