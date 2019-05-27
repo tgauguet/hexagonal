@@ -11,6 +11,8 @@ gem 'pg'
 gem 'devise'
 # Use webpacker
 gem 'webpacker', '~> 4.0'
+# Use faker to generate fake data
+gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 # Use SCSS for stylesheets

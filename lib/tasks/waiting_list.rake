@@ -2,6 +2,11 @@ namespace :waiting_list do
   desc "Send reconfirmation email to waiting list"
 
   task reconfirm: :environment do
-    Request.init_waiting_list
+    Request.send_reconfirmation
   end
+
+  task clean: :environment do
+    Request.clean
+  end
+  
 end

@@ -21,6 +21,6 @@ class User < ApplicationRecord
 
   # Override Devise::Confirmable#after_confirmation
   def after_confirmation
-    self.request.update(email_confirmed: true)
+    self.request.update(email_confirmed: true, status: 'first confirmed')
   end
 end
