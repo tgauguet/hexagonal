@@ -31,14 +31,14 @@ class Request < ApplicationRecord
     end
   end
 
-  # After 48 hours, get all the unreconfirmed request and mark them as expired
+  # After 48 hours, all unreconfirmed requests are marked as 'expired'
   def self.clean
     Request.overtimed_confirmation.update_all(status: "expired")
   end
 
   # accept an existing request
-  def accept! id
-
+  def accept!(id)
+    Request.find_by_id(id).update(status: 'accepted')
   end
 
 end

@@ -24,4 +24,9 @@ class User < ApplicationRecord
     status = Request.accepted.count < 20 ? 'accepted' : 'confirmed'
     self.request.update(status: status)
   end
+
+  def waiting_number
+    Request.confirmed.count
+  end
+
 end

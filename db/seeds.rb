@@ -1,9 +1,9 @@
 require 'faker'
 
-26.times do
+20.times do
 
   user = User.new(
-    name: Faker::Name.name,
+    name: Faker::Name.first_name,
     email: Faker::Internet.email,
     password: 'password',
     password_confirmation: 'password',
@@ -11,6 +11,7 @@ require 'faker'
     phone_number: '4567892392'
   )
   user.skip_confirmation!
-  user.save
+  user.save!
+  user.request.update(status: 'accepted')
 
 end
