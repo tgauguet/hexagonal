@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi <%= @user.name %></h1>
+    <p>
+      We provide this email to inform you of your current order in the waiting list : NUMBER
+      Please confirm that you are still interested in joining our coworking space, otherwise your request will be removed from the waiting list.
+      You can confirm clicking the link below :
+      <%= @btn_url %>
+
+      Many thanks,
+
+      HexaGoWorking team
+    </p>
+  </body>
+</html>

@@ -35,6 +35,10 @@ header {
         text-align: center;
         background: $blue_green;
       }
+
+      a:hover {
+        background: $blue_green_light!important;
+      }
     }
   }
 
