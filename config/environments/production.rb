@@ -64,7 +64,7 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "hexagonalConsultingTest_#{Rails.env}"
 
   config.action_mailer.perform_caching = false
-  config.action_mailer.default_url_options = { :host => "www.hexagonal-consulting.herokuapp.com" }
+  config.action_mailer.default_url_options = { :host => "hexagonal-consulting.herokuapp.com" }
   config.action_mailer.smtp_settings = {
     address:              'smtp.gmail.com',
     port:                 587,
