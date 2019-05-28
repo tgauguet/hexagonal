@@ -12,6 +12,6 @@ require 'faker'
   )
   user.skip_confirmation!
   user.save!
-  user.request.update(status: 'accepted')
+  user.request.update(status: 'accepted') unless Request.accepted.count >= 20
 
 end

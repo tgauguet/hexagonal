@@ -13,12 +13,12 @@ class Request < ApplicationRecord
   # that need to receive a confirmation email
   scope :to_reconfirm, -> { confirmed
                               .where(pending_reconfirmation: false)
-                              .where("requests.updated_at < ?", 1.minutes.ago) } # replace with 3 months ago
+                              .where("requests.updated_at < ?", 3.months.ago) }
 
-  # for which reconfirmation time has expired
+  # for which reconfirmation time has expired ( 48h )
   scope :overtimed_confirmation, -> { confirmed
                               .where(pending_reconfirmation: true)
-                              .where("updated_at < ?", 2.minutes.ago) } # replace with 2 days ago
+                              .where("updated_at < ?", 2.days.ago) }
 
   # Send pending confirmation email every 3 months
   def self.send_reconfirmation
