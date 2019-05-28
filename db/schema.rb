@@ -16,9 +16,7 @@ ActiveRecord::Schema.define(version: 2019_05_26_100800) do
   enable_extension "plpgsql"
 
   create_table "requests", force: :cascade do |t|
-    t.string "status", default: "pending confirmation"
-    t.boolean "email_confirmed", default: false
-    t.boolean "accepted_in_list", default: false
+    t.string "status", default: "pending"
     t.boolean "pending_reconfirmation", default: false
     t.integer "user_id"
     t.datetime "created_at", null: false

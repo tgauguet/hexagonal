@@ -1,5 +1,5 @@
 class Request < ApplicationRecord
-  belongs_to :user
+  belongs_to :user, dependent: :destroy
   validates_presence_of :user_id, :status, on: :create
   validates :status, inclusion: { in: %w( pending confirmed accepted expired ) }
 
@@ -13,12 +13,12 @@ class Request < ApplicationRecord
   # that need to receive a confirmation email
   scope :to_reconfirm, -> { confirmed
                               .where(pending_reconfirmation: false)
-                              .where("requests.updated_at < ?", 5.minutes.ago) } # replace with 3 months ago
+                              .where("requests.updated_at < ?", 1.minutes.ago) } # replace with 3 months ago
 
   # for which reconfirmation time has expired
   scope :overtimed_confirmation, -> { confirmed
                               .where(pending_reconfirmation: true)
-                              .where("updated_at < ?", 10.minutes.ago) } # replace with 2 days ago
+                              .where("updated_at < ?", 2.minutes.ago) } # replace with 2 days ago
 
   # Send pending confirmation email every 3 months
   def self.send_reconfirmation
@@ -34,6 +34,7 @@ class Request < ApplicationRecord
 
   # After 48 hours, all unreconfirmed requests are marked as 'expired'
   def self.clean
+    puts "cleaning #{Request.overtimed_confirmation.count} user"
     Request.overtimed_confirmation.update_all(status: "expired")
   end
 
@@ -43,9 +44,13 @@ class Request < ApplicationRecord
                       .index(self.user_id) + 1
   end
 
-  # accept an existing request
+  # accept an existing request if there is a spot left
   def accept!
-    self.update(status: 'accepted')
+    if Request.accepted.count < 20
+      self.update(status: 'accepted')
+    else
+      puts 'Can not accept this request, the list is full.'
+    end
   end
 
 end

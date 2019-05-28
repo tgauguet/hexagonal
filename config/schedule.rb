@@ -3,8 +3,5 @@ set :environment, "development"
 
 every 2.minutes do # should be 4 hours
   rake "waiting_list:reconfirm"
-end
-
-every 20.minutes do # should be 4 hours
   rake "waiting_list:clean"
 end

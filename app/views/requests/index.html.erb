@@ -17,7 +17,7 @@
       <i>Requests that are accepted</i>
       <ul>
         <% @accepted.each do |request| %>
-          <li><%= request.user.name %></li>
+          <li><%= request.user.name %> <%= link_to image_pack_tag('rubbish-bin.png'), request, method: :delete, class: 'bin-img' %></li>
         <% end %>
       </ul>
     </div>

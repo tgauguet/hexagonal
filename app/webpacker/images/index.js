@@ -1,3 +1,5 @@
 import './logo.jpg'
 import './logo-white.png'
 import './home-background.jpg'
+import './rubbish-bin.png'
+import './success.png'
