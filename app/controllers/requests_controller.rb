@@ -1,5 +1,4 @@
 class RequestsController < ApplicationController
-  before_action :set_request, only: :destroy
 
   def index
     @confirmed = Request.confirmed.first_come_first_served.limit(20)
@@ -9,7 +8,7 @@ class RequestsController < ApplicationController
   end
 
   def destroy
-    @request = Request.find_by_id(params[:id])
+    @request = Request.find(params[:id])
     if @request.destroy
       flash[:notice] = 'Request has been successfully destroyed'
     else
@@ -17,12 +16,6 @@ class RequestsController < ApplicationController
     end
 
     redirect_back(fallback_location: root_path)
-  end
-
-  private
-
-  def set_request
-    @request = Request.find(params[:id])
   end
 
 end

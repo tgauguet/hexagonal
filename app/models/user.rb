@@ -25,8 +25,4 @@ class User < ApplicationRecord
     self.request.update(status: status)
   end
 
-  def waiting_number
-    Request.confirmed.count
-  end
-
 end
