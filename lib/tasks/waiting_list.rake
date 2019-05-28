@@ -1,3 +1,5 @@
+# for development environment
+
 namespace :waiting_list do
   desc "Send reconfirmation email to waiting list"
 
@@ -8,5 +10,5 @@ namespace :waiting_list do
   task clean: :environment do
     Request.clean
   end
-  
+
 end
