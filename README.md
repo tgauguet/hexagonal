@@ -1,5 +1,9 @@
 # Hexagonal Consulting Entry Test
 
+## Access production
+
+https://hexagonal-consulting.herokuapp.com
+
 ## Instructions
 
 Your Client is a French Coworking space that rents workstations to freelancers. When someone is accepted into the coworking space, he signs a contract that is renewed automatically every month. Because of the high demand, the Client needs to put in place a waiting list in order to keep track of people wanting to join the coworking.
