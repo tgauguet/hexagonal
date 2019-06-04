@@ -25,7 +25,7 @@ class Request < ApplicationRecord
     begin
       User.with_pending_reconfirmation.each do |user|
         ApplicationMailer.reconfirm_email(user).deliver
-        user.request.update(pending_reconfirmation: true)
+        user.request.update!(pending_reconfirmation: true)
       end
     rescue => error
       puts "An error occcured while initializing waiting list : #{error}"
@@ -35,22 +35,40 @@ class Request < ApplicationRecord
   # After 48 hours, all unreconfirmed requests are marked as 'expired'
   def self.clean
     puts "cleaning #{Request.overtimed_confirmation.count} user"
-    Request.overtimed_confirmation.update_all(status: "expired")
+    Request.overtimed_confirmation.update_all!(status: "expired")
   end
 
   def current_position
     ids_list = Request.confirmed
-                      .map(&:user_id)
+                      .map(&:user_id) # :pluck
                       .index(self.user_id) + 1
+  end
+
+  def self.to_csv
+    attr = %w{ id creation_date status pending_reconfirmation }
+
+    CSV.generate(headers: true) do |csv|
+      csv << attr
+
+      all.each do |request|
+        csv << attr.map{ |attr| request.send(attr) }
+      end
+    end
   end
 
   # accept an existing request if there is a spot left
   def accept!
     if Request.accepted.count < 20
-      self.update(status: 'accepted')
+      self.update!(status: 'accepted')
     else
       puts 'Can not accept this request, the list is full.'
     end
+  end
+
+  private
+
+  def creation_date
+    created_at.to_s(:short)
   end
 
 end

@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  superficy: 1
+  price: MyString
+  capacity: 1
+
+two:
+  superficy: 1
+  price: MyString
+  capacity: 1

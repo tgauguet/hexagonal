@@ -6,4 +6,8 @@ class UsersController < ApplicationController
     flash[:notice] = "Thank you for your confirmation !"
   end
 
+  def dashboard
+    @user = current_user
+  end
+
 end

@@ -1,0 +1,19 @@
+.user-dashboard {
+  text-align: center;
+  padding-top: 4em;
+
+  img{
+    width: 12em;
+    display: block;
+    margin: auto;
+    margin-bottom: 2em;
+  }
+  h2{
+    margin-bottom: 1em;
+  }
+  a{
+    background: $blue-green;
+    color: white;
+    padding: 1em;
+  }
+}

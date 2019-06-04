@@ -6,11 +6,14 @@ class User < ApplicationRecord
   validates_presence_of :name, :bio, :phone_number
   validates_length_of :bio, minimum: 50
   validates_numericality_of :phone_number, length: { minimum: 10, maximum: 15 }
-  validates_format_of :name, with: /\A[a-zA-Z ]+\z/ # should only contain letters
 
   scope :with_pending_reconfirmation, -> { joins(:request).merge(Request.to_reconfirm) }
 
   after_create :create_request
+
+  def admin?
+    self.admin
+  end
 
   private
 

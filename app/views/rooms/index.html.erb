@@ -1,0 +1,17 @@
+<p id="notice"><%= notice %></p>
+<div class="room-cntnr">
+  <h1>Our rooms</h1>
+  <div class="rooms-cntnr">
+    <% @rooms.each do |room| %>
+      <%= link_to room do %>
+        <div class="single-room">
+          <img src='https://thespaces.com/wp-content/uploads/2018/07/Ministry_coworking-club-london-1-1024x683.jpg' />
+          <h3><%= room.name %></h3>
+          <p>📏 <%= room.superficy %></p>
+          <p>💵 <%= room.price %>€</p>
+          <p>👩🏻‍💻 <%= room.capacity %></p>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>

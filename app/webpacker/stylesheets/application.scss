@@ -7,6 +7,8 @@ $fa-font-path: '~@fortawesome/fontawesome-free/webfonts';
 @import 'devise/registrations/new';
 @import 'welcome/index';
 @import 'requests/index';
+@import 'users/dashboard';
+@import 'rooms/index';
 
 header {
   .header-logo {

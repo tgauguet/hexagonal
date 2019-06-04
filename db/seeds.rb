@@ -15,3 +15,16 @@ require 'faker'
   user.request.update(status: 'accepted') unless Request.accepted.count >= 20
 
 end
+
+10.times do
+
+  room = Room.new(
+    capacity: Faker::Number.number(1),
+    superficy: Faker::Number.number(2),
+    price: Faker::Number.number(3),
+    name: Faker::Creature::Dog.name
+  )
+  room.update(capacity: 1) if room.capacity == 0
+  room.save!
+
+end

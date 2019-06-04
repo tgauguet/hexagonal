@@ -8,7 +8,7 @@
       <i>Requests waiting to be included in the list</i>
       <ul>
         <% @confirmed.each_with_index do |request, index| %>
-          <li><%= index + 1 %> <%= request.user.name %></li>
+          <li><%= index + 1 %> <%= request.user.name %> <%= link_to image_pack_tag('checked.png'), requests_accept_path(id: request.id), method: :post, class: 'bin-img' %></li>
         <% end %>
       </ul>
     </div>

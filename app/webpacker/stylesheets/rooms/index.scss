@@ -1,0 +1,55 @@
+.room-cntnr{
+  text-align: center;
+  padding: 2em;
+
+  .rooms-cntnr{
+
+    .single-room {
+      border-radius: 4px 4px 4px 4px;
+      -moz-border-radius: 4px 4px 4px 4px;
+      -webkit-border-radius: 4px 4px 4px 4px;
+      border: 1px solid #e1ddf0;
+      display: inline-block;
+      vertical-align: top;
+      margin: .5em;
+      overflow: hidden;
+      text-align: left;
+      width: 20em;
+      height: 14em;
+      text-align: center;
+
+      h3{
+        position: absolute;
+        color: white;
+        padding: .4em;
+        margin: auto;
+        margin-top: 2.1em;
+        width: 11.4em;
+      }
+
+      p{
+        margin: .5em .4em;
+        color: #666666;
+        width: 5em;
+        height: 2em;
+        display: inline-block;
+        vertical-align: top;
+        position: relative;
+      }
+
+      img{
+        width: 1.6em;
+        float: right;
+      }
+
+      img:first-of-type {
+        width: 100%;
+        opacity: .8;
+        height: 11.2em;
+      }
+    }
+    .single-room:hover img{
+      opacity: 1;
+    }
+  }
+}
