@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_06_04_153814) do
+ActiveRecord::Schema.define(version: 2019_06_05_083132) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "requests", force: :cascade do |t|
+  create_table "bookings", force: :cascade do |t|
     t.string "status", default: "pending"
     t.boolean "pending_reconfirmation", default: false
     t.integer "user_id"

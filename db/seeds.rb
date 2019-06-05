@@ -12,7 +12,7 @@ require 'faker'
   )
   user.skip_confirmation!
   user.save!
-  user.request.update(status: 'accepted') unless Request.accepted.count >= 20
+  user.booking.update(status: 'accepted') unless Booking.accepted.count >= 20
 
 end
 
