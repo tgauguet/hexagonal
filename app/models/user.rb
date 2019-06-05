@@ -7,9 +7,9 @@ class User < ApplicationRecord
   validates_length_of :bio, minimum: 50
   validates_numericality_of :phone_number, length: { minimum: 10, maximum: 15 }
 
-  scope :with_pending_reconfirmation, -> { joins(:booking).merge(Booking.to_reconfirm) }
+  # scope :with_pending_reconfirmation, -> { joins(:booking).merge(Booking.to_reconfirm) }
 
-  after_create :create_booking
+  # after_create :create_booking
 
   def admin?
     self.admin
@@ -17,15 +17,15 @@ class User < ApplicationRecord
 
   private
 
-  # Create a new booking with pending confirmation status
-  def create_booking
-    self.create_booking!
-  end
+  # Create a new booking
+  # def create_booking
+  #   self.create_booking!
+  # end
 
   # Override Devise::Confirmable#after_confirmation
-  def after_confirmation
-    status = (Booking.accepted.count < 20 && !Booking.confirmed) ? 'accepted' : 'confirmed'
-    self.booking.update(status: status)
-  end
+  # def after_confirmation
+  #   status = (Booking.accepted.count < 20 && !Booking.confirmed) ? 'accepted' : 'confirmed'
+  #   self.booking.update(status: status)
+  # end
 
 end

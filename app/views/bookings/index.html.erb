@@ -1,41 +1,14 @@
 <div class="list-cntnr">
   <div class="title">
-    <h1>Waiting list</h1>
+    <h1>Manage your bookings</h1>
   </div>
   <div class="lists-cntnr">
     <div>
-      <h2 class="bg-info">Confirmed (<%= @confirmed.count %>)</h2>
-      <i>bookings waiting to be included in the list</i>
+      <h2 class="bg-info">My Bookings (<%= @bookings.count %>)</h2>
+      <i>My bookings</i>
       <ul>
-        <% @confirmed.each_with_index do |booking, index| %>
+        <% @bookings.each_with_index do |booking, index| %>
           <li><%= index + 1 %> <%= booking.user.name %> <%= link_to image_pack_tag('checked.png'), bookings_accept_path(id: booking.id), method: :post, class: 'bin-img' %></li>
-        <% end %>
-      </ul>
-    </div>
-    <div>
-      <h2 class="bg-success">Accepted (<%= @accepted.count %>/20)</h2>
-      <i>bookings that are accepted</i>
-      <ul>
-        <% @accepted.each do |booking| %>
-          <li><%= booking.user.name %> <%= link_to image_pack_tag('rubbish-bin.png'), booking, method: :delete, class: 'bin-img' %></li>
-        <% end %>
-      </ul>
-    </div>
-    <div>
-      <h2 class="bg-warning">Unconfirmed (<%= @pending.count %>)</h2>
-      <i>bookings whose user has never confirmed his email</i>
-      <ul>
-        <% @pending.each do |booking| %>
-          <li><%= booking.user.name %></li>
-        <% end %>
-      </ul>
-    </div>
-    <div>
-      <h2 class="bg-secondary">Expired (<%= @expired.count %>)</h2>
-      <i>bookings that will never be included in the list</i>
-      <ul>
-        <% @expired.each do |booking| %>
-          <li><%= booking.user.name %></li>
         <% end %>
       </ul>
     </div>

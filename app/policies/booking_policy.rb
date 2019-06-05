@@ -1,4 +1,4 @@
-class RequestPolicy
+class BookingPolicy
   attr_reader :user, :post
 
   def initialize(user, post)

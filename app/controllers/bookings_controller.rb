@@ -4,12 +4,15 @@ class BookingsController < ApplicationController
   before_action :set_and_authorize_booking, only: [:accept, :destroy]
 
   def index
-    @confirmed = Booking.confirmed.first_come_first_served.limit(20)
-    @accepted = Booking.accepted.limit(20)
-    @expired = Booking.expired.limit(20)
-    @pending = Booking.unconfirmed.limit(20)
+    # @confirmed = Booking.confirmed.first_come_first_served.limit(20)
+    # @accepted = Booking.accepted.limit(20)
+    # @expired = Booking.expired.limit(20)
+    # @pending = Booking.unconfirmed.limit(20)
+    @user = current_user
+    @bookings = @user.bookings
   end
 
+  # Download a CSV list of the bookings
   def download
     @csv_list = Booking.order(:status)
     authorize @csv_list
@@ -20,14 +23,14 @@ class BookingsController < ApplicationController
     end
   end
 
-  def accept
-    if @booking.accept!
-      flash[:notice] = 'Booking has been successfully accepted'
-    else
-      flash[:notice] = 'Error while accepting the booking'
-    end
-    redirect_back(fallback_location: root_path)
-  end
+  # def accept
+  #   if @booking.accept!
+  #     flash[:notice] = 'Booking has been successfully accepted'
+  #   else
+  #     flash[:notice] = 'Error while accepting the booking'
+  #   end
+  #   redirect_back(fallback_location: root_path)
+  # end
 
   def destroy
     if @booking.destroy
