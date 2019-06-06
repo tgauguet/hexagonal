@@ -6,14 +6,6 @@ class BookingPolicy
     @post = post
   end
 
-  def destroy?
-    user.admin?
-  end
-
-  def accept?
-    user.admin?
-  end
-
   def download?
     user.admin?
   end

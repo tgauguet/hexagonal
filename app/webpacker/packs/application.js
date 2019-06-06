@@ -16,10 +16,17 @@
 // const imagePath = (name) => images(name, true)
 
 import 'stylesheets/application'
-import '../src/javascripts/welcome'
+import '../src/javascripts/rooms'
 import 'bootstrap/dist/js/bootstrap'
 import Rails from 'rails-ujs'
 import Turbolinks from 'turbolinks'
+import flatpickr from 'flatpickr'
+import 'flatpickr/dist/flatpickr.min.css'
+
+flatpickr('#datepicker', {
+  enableTime: false,
+  minDate: 'today'
+});
 
 Rails.start()
 Turbolinks.start()

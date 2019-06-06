@@ -2,9 +2,100 @@
   text-align: center;
   padding: 2em;
 
+  .filters {
+    margin: 0em 6.7em 1em;
+    height: 2.9em;
+
+    .date-filter {
+      height: 3em;
+    }
+
+    .fake-btn {
+      float: right;
+      border: 1px solid $grey;
+      padding: .43em .6em;
+      margin-right: 1em;
+      border-radius: .2em;
+    }
+
+    .fake-btn:first-of-type {
+      float: left;
+      margin: 0;
+      background: white;
+    }
+
+    .fake-btn:first-of-type:hover {
+      background: $grey;
+      cursor: pointer;
+    }
+
+    .more-filters {
+      height: 4em;
+      // display: none;
+    }
+
+    .datepicker {
+      float: right;
+      width: 22em;
+      display: flex;
+
+      input {
+        flex: 3;
+        border-radius: 0 .2em .2em 0;
+      }
+
+      input:first-of-type {
+        border-radius: 0;
+      }
+
+      .input-group-addon {
+        background: rgb(195,202,210);
+        padding-top: .7em;
+        font-size: .8em;
+        font-weight: bold;
+        flex: 1;
+      }
+
+      .input-group-addon:first-of-type {
+        background: rgb(195,202,210);
+        padding-top: .7em;
+        font-size: .8em;
+        font-weight: bold;
+        border-radius: .2em 0 0 .2em ;
+        flex: 2;
+      }
+    }
+  }
+
   .rooms-cntnr{
 
+    #form-cta {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      z-index: 200;
+      left: 0;
+      padding: 1em;
+      background: white;
+      margin-left: -9999px;
+      -webkit-box-shadow:-8px -7px 10px -4px #908c8c ;
+      -moz-box-shadow:-8px -7px 10px -4px #908c8c ;
+      box-shadow:-8px -7px 10px -4px #908c8c ;
+
+      p {
+        margin-top: 1em;
+      }
+
+      .btn {
+        background: $primary;
+        color: white;
+        margin-top: 0em;
+        margin-left: 3em;
+      }
+    }
+
     .single-room {
+      position: relative;
       border-radius: 4px 4px 4px 4px;
       -moz-border-radius: 4px 4px 4px 4px;
       -webkit-border-radius: 4px 4px 4px 4px;
@@ -17,6 +108,25 @@
       width: 20em;
       height: 14em;
       text-align: center;
+
+      input[type='checkbox'] {
+        display: none;
+      }
+
+      input:checked + label{
+        border: 7px solid $primary;
+      }
+
+      label{
+        color: transparent;
+        width: 100.3%;
+        height: 100%;
+        position: absolute;
+        margin: 0em;
+        margin-left: -1em;
+        z-index: 100;
+        border-radius: 4px;
+      }
 
       h3{
         position: absolute;
@@ -44,12 +154,16 @@
 
       img:first-of-type {
         width: 100%;
-        opacity: .8;
         height: 11.2em;
       }
     }
-    .single-room:hover img{
+
+    .single-room input:checked + img{
       opacity: 1;
+    }
+
+    .single-room label:hover{
+      cursor: pointer;
     }
   }
 }

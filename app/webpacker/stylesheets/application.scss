@@ -36,17 +36,17 @@ header {
         padding-left: 1em;
         padding-right: 1em;
         text-align: center;
-        background: $blue_green;
+        background: $secondary;
       }
 
       a:hover {
-        background: $blue_green_light!important;
+        background: $fourth!important;
       }
     }
   }
 
   .navbar {
-    background: $blue;
+    background: $primary;
   }
 
 }

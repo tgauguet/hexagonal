@@ -2,15 +2,21 @@
   <div class="title">
     <h1>Manage your bookings</h1>
   </div>
-  <div class="lists-cntnr">
-    <div>
-      <h2 class="bg-info">My Bookings (<%= @bookings.count %>)</h2>
-      <i>My bookings</i>
-      <ul>
-        <% @bookings.each_with_index do |booking, index| %>
-          <li><%= index + 1 %> <%= booking.user.name %> <%= link_to image_pack_tag('checked.png'), bookings_accept_path(id: booking.id), method: :post, class: 'bin-img' %></li>
-        <% end %>
-      </ul>
-    </div>
+    <table class="lists-cntnr">
+      <tr>
+        <th>Room name</th>
+        <th>Start date</th>
+        <th>End date</th>
+        <th>Manage</th>
+      </tr>
+      <% @bookings.each_with_index do |booking| %>
+        <tr>
+          <td><%= booking.room.name %></td>
+          <td><%= booking.start %></td>
+          <td><%= booking.end %></td>
+          <td><%= link_to image_pack_tag('rubbish-bin.png'), booking, method: :delete %></td>
+        </tr>
+      <% end %>
+    </table>
   </div>
 </div>

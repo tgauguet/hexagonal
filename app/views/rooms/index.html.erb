@@ -1,17 +1,39 @@
-<p id="notice"><%= notice %></p>
 <div class="room-cntnr">
-  <h1>Our rooms</h1>
+  <div class="filters">
+    <%= form_with model: @booking do |f| %>
+    <%#= form_with url: '/filter-rooms' do |f| %>
+      <div class="datepicker">
+        <span class="input-group-addon">FROM</span>
+        <%= f.text_field(:start , class: "dateinput input-sm form-control", id: "datepicker", onchange: 'enableEndDate()') %>
+        <span class="input-group-addon">TO</span>
+        <%#= f.text_field(:end , class: "dateinput input-sm form-control", id: "datepicker",onchange: 'this.form.submit()', disabled: true) %>
+        <%= f.text_field(:end , class: "dateinput input-sm form-control", id: "datepicker", disabled: true) %>
+      </div>
+      <div class="fake-btn">📆 Check dates</div>
+    <%# end %>
+  </div>
   <div class="rooms-cntnr">
-    <% @rooms.each do |room| %>
-      <%= link_to room do %>
+    <%#= form_with model: @booking do |f| %>
+      <div id="form-cta">
+        <%= f.hidden_field :status, value: "accepted" %>
+        <p><i>Once your room selection is finished, click here </i>👉
+        <%= f.button :submit, class: "btn" do %>BOOK <span id='room-count'></span> ROOM<span id='room-plural'></span> !<% end %>
+        </p>
+      </div>
+
+      <% @rooms.each do |room| %>
+
         <div class="single-room">
-          <img src='https://thespaces.com/wp-content/uploads/2018/07/Ministry_coworking-club-london-1-1024x683.jpg' />
+          <%= f.check_box("room_ids[#{room.id}]", id: "booking_#{room.id}", onchange: 'showFormBtn()') %>
+          <%= f.label "#{room.id}" %>
+          <%= image_tag "https://picsum.photos/600/300?grayscale&random=#{room.id}" %>
           <h3><%= room.name %></h3>
-          <p>📏 <%= room.superficy %></p>
+          <p>📏 <%= room.superficy %> m2</p>
           <p>💵 <%= room.price %>€</p>
           <p>👩🏻‍💻 <%= room.capacity %></p>
         </div>
       <% end %>
+
     <% end %>
   </div>
 </div>

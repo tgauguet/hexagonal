@@ -1,15 +1,41 @@
 class BookingsController < ApplicationController
   require 'csv'
   before_action :authenticate_user!
-  before_action :set_and_authorize_booking, only: [:accept, :destroy]
+  before_action :set_user
+  before_action :set_booking, only: [:destroy]
 
   def index
-    # @confirmed = Booking.confirmed.first_come_first_served.limit(20)
-    # @accepted = Booking.accepted.limit(20)
-    # @expired = Booking.expired.limit(20)
-    # @pending = Booking.unconfirmed.limit(20)
-    @user = current_user
-    @bookings = @user.bookings
+    @bookings = Booking.all
+  end
+
+  def create
+    rooms = booking_params[:room_ids].select { |key, val| val != '0'}
+
+    clean_params = booking_params.tap { |p| p.delete("room_ids") }
+
+    begin
+      rooms.keys.each_with_index do |room_id, index|
+        clean_params[:room_id] = room_id
+        @booking = @user.bookings.new(clean_params)
+        @booking.save!
+      end
+
+      flash[:notice] = "Bookings successfully created"
+      redirect_to action: "index"
+    rescue => e
+      puts "BOOKING CREATION ERROR : #{e}"
+      flash[:alert] = "Error while creating a new booking"
+      redirect_back(fallback_location: root_path)
+    end
+  end
+
+  def destroy
+    if @booking.destroy
+      flash[:notice] = 'Booking has been successfully destroyed'
+    else
+      flash[:notice] = 'Error while destroying the booking'
+    end
+    redirect_back(fallback_location: root_path)
   end
 
   # Download a CSV list of the bookings
@@ -23,29 +49,18 @@ class BookingsController < ApplicationController
     end
   end
 
-  # def accept
-  #   if @booking.accept!
-  #     flash[:notice] = 'Booking has been successfully accepted'
-  #   else
-  #     flash[:notice] = 'Error while accepting the booking'
-  #   end
-  #   redirect_back(fallback_location: root_path)
-  # end
-
-  def destroy
-    if @booking.destroy
-      flash[:notice] = 'Booking has been successfully destroyed'
-    else
-      flash[:notice] = 'Error while destroying the booking'
-    end
-    redirect_back(fallback_location: root_path)
-  end
-
   private
 
-  def set_and_authorize_booking
+  def set_user
+    @user = current_user
+  end
+
+  def booking_params
+    params.require(:booking).permit(:start, :end, :status, :user_id, :room_ids => {})
+  end
+
+  def set_booking
     @booking = Booking.find(params[:id])
-    authorize @booking
   end
 
 end
