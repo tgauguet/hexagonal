@@ -16,8 +16,9 @@
 // const imagePath = (name) => images(name, true)
 
 import 'stylesheets/application'
-import '../src/javascripts/rooms'
+import '../src/javascripts/rooms.js.erb'
 import 'bootstrap/dist/js/bootstrap'
+import axios from 'axios'
 import Rails from 'rails-ujs'
 import Turbolinks from 'turbolinks'
 import flatpickr from 'flatpickr'

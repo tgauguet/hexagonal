@@ -1,0 +1,9 @@
+<div class="single-room">
+  <%= f.check_box("room_ids[#{room.id}]", id: "booking_#{room.id}", onchange: 'showFormBtn()') %>
+  <%= f.label "#{room.id}" %>
+  <%= image_tag "https://picsum.photos/600/300?grayscale&random=#{room.id}" %>
+  <h3><%= room.name %></h3>
+  <p>📏 <%= room.superficy %> m2</p>
+  <p>💵 <%= room.price %>€</p>
+  <p>👩🏻‍💻 <%= room.capacity %></p>
+</div>

@@ -1,3 +1,9 @@
+const url = new URL(window.location.href);
+if (url) {
+  document.querySelector(".start").value = url.searchParams.get("begin");
+  document.querySelector(".end").value = url.searchParams.get("end");
+}
+
 window.enableEndDate = () => {
   const inputs = document.getElementsByClassName('dateinput')
   const start = inputs[0]
@@ -21,4 +27,11 @@ window.showFormBtn = () => {
 window.showFilters = () => {
   const parentDiv = document.getElementById('filters-box');
   parentDiv.style.height = '5.9em';
+}
+
+window.reloadRooms = () => {
+  const begin = document.querySelector(".start").value
+  const end = document.querySelector(".end").value
+  const urlPath = `http://localhost:3000/rooms?begin=${begin}&end=${end}`
+  window.location = urlPath
 }

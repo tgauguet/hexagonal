@@ -1,7 +1,12 @@
 class Booking < ApplicationRecord
   belongs_to :user, dependent: :destroy
   belongs_to :room
-  validates_presence_of :user_id, on: :create
+  validates_presence_of :user_id, :start, :end_day, :room_id, on: :create
+
+  scope :with_existing_slot, -> (start_date, end_date) {
+    where("? BETWEEN start AND end_day OR ? BETWEEN start AND end_day OR (? <= start AND ? >= end_day)", start_date, end_date, start_date, end_date)
+  }
+
   # validates :status, inclusion: { in: %w( confirmed accepted ) } #{ in: %w( pending confirmed accepted expired ) }
 
   # not allowed in the waiting list
