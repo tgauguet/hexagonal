@@ -1,7 +1,18 @@
 const url = new URL(window.location.href);
-if (url) {
-  document.querySelector(".start").value = url.searchParams.get("begin");
-  document.querySelector(".end").value = url.searchParams.get("end");
+
+if (url && url.searchParams) {
+  const beginParam = url.searchParams.get("begin");
+  const endParam = url.searchParams.get("end");
+
+  document.querySelector(".start").value = beginParam
+  document.querySelector(".end").value = endParam
+  if (!beginParam || !endParam) {
+    inputs = document.querySelectorAll("input[type='checkbox']")
+
+    for(var i = 0; i < inputs.length; i++) {
+      inputs[i].disabled = true;   
+    }
+  }
 }
 
 window.enableEndDate = () => {

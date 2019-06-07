@@ -9,7 +9,6 @@
       </div>
       <div class="fake-btn">📆 Check availabilities</div>
     </div>
-    <%= link_to rooms_path, id: 'test', remote: true do %>hello<% end %>
 
     <div class="rooms-cntnr">
 
@@ -19,6 +18,7 @@
         <%= f.button :submit, class: "btn" do %>BOOK <span id='room-count'></span> ROOM<span id='room-plural'></span> !<% end %>
         </p>
       </div>
+      
       <div id="rooms">
         <%= render @rooms, f: f %>
       </div>

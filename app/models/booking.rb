@@ -3,6 +3,7 @@ class Booking < ApplicationRecord
   belongs_to :room
   validates_presence_of :user_id, :start, :end_day, :room_id, on: :create
 
+  # Replace SQL with active record
   scope :with_existing_slot, -> (start_date, end_date) {
     where("? BETWEEN start AND end_day OR ? BETWEEN start AND end_day OR (? <= start AND ? >= end_day)", start_date, end_date, start_date, end_date)
   }
