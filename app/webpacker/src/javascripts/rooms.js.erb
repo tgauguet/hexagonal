@@ -10,7 +10,7 @@ if (url && url.searchParams) {
     inputs = document.querySelectorAll("input[type='checkbox']")
 
     for(var i = 0; i < inputs.length; i++) {
-      inputs[i].disabled = true;   
+      inputs[i].disabled = true;
     }
   }
 }
@@ -40,9 +40,16 @@ window.showFilters = () => {
   parentDiv.style.height = '5.9em';
 }
 
-window.reloadRooms = () => {
+$('.end').change(function() {
   const begin = document.querySelector(".start").value
   const end = document.querySelector(".end").value
-  const urlPath = `http://localhost:3000/rooms?begin=${begin}&end=${end}`
-  window.location = urlPath
-}
+
+  $.ajax({
+    type: 'GET',
+    url: `http://localhost:3000/rooms`,
+    data: `begin=${begin}&end=${end}`,
+    success: function(data){
+      $('#rooms').html($(data).find('#rooms').html());
+    }
+  })
+})

@@ -1,11 +1,11 @@
 <div class="room-cntnr">
-  <div class="filters">
-    <%= form_with model: @booking do |f| %>
+  <%= form_with model: @booking do |f| %>
+    <div class="filters">
       <div class="datepicker">
         <span class="input-group-addon">FROM</span>
         <%= f.text_field(:start , class: "dateinput input-sm form-control start", id: "datepicker", onchange: 'enableEndDate()') %>
         <span class="input-group-addon">TO</span>
-        <%= f.text_field(:end_day , class: "dateinput input-sm form-control end", onchange: "reloadRooms()", id: "datepicker") %>
+        <%= f.text_field(:end_day , class: "dateinput input-sm form-control end", id: "datepicker") %>
       </div>
       <div class="fake-btn">📆 Check availabilities</div>
     </div>
@@ -18,11 +18,15 @@
         <%= f.button :submit, class: "btn" do %>BOOK <span id='room-count'></span> ROOM<span id='room-plural'></span> !<% end %>
         </p>
       </div>
-      
+
       <div id="rooms">
-        <%= render @rooms, f: f %>
+        <% if @rooms.count == 0 %>
+          <p class='room-taken'>Oh no 😫 !<br>Our rooms are all taken for these dates...</p>
+        <% else %>
+          <%= render @rooms, f: f %>
+        <% end %>
       </div>
 
-    <% end %>
-  </div>
+    </div>
+  <% end %>
 </div>

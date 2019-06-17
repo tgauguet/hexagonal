@@ -3,56 +3,23 @@ class Booking < ApplicationRecord
   belongs_to :room
   validates_presence_of :user_id, :start, :end_day, :room_id, on: :create
 
-  # Replace SQL with active record
-  scope :with_existing_slot, -> (start_date, end_date) {
-    where("? BETWEEN start AND end_day OR ? BETWEEN start AND end_day OR (? <= start AND ? >= end_day)", start_date, end_date, start_date, end_date)
-  }
+  scope :start_between, -> (start, finish) { where(start: start..finish) }
+  scope :end_between, -> (start, finish) { where(end_day: start..finish) }
+  extend Filterable
 
-  # validates :status, inclusion: { in: %w( confirmed accepted ) } #{ in: %w( pending confirmed accepted expired ) }
+  def self.with_existing_slot(start, finish)
+    arel = Booking.arel_table
 
-  # not allowed in the waiting list
-  # scope :first_come_first_served, -> { order('created_at ASC') }
-  # scope :unconfirmed, -> { where(status: 'pending') }
-  # scope :confirmed, -> { where(status: 'confirmed') }
-  # scope :accepted, -> { where(status: 'accepted') }
-  # scope :expired, -> { where(status: 'expired') }
-
-  # # that need to receive a confirmation email
-  # scope :to_reconfirm, -> { confirmed
-  #                             .where(pending_reconfirmation: false)
-  #                             .where("bookings.updated_at < ?", 3.months.ago) }
-  #
-  # # for which reconfirmation time has expired ( 48h )
-  # scope :overtimed_confirmation, -> { confirmed
-  #                             .where(pending_reconfirmation: true)
-  #                             .where("updated_at < ?", 2.days.ago) }
-
-  # Send pending confirmation email every 3 months
-  # def self.send_reconfirmation
-  #   begin
-  #     User.with_pending_reconfirmation.each do |user|
-  #       ApplicationMailer.reconfirm_email(user).deliver
-  #       user.booking.update!(pending_reconfirmation: true)
-  #     end
-  #   rescue => error
-  #     puts "An error occcured while initializing waiting list : #{error}"
-  #   end
-  # end
-
-  # After 48 hours, all unreconfirmed booking are marked as 'expired'
-  # def self.clean
-  #   puts "cleaning #{Booking.overtimed_confirmation.count} user"
-  #   Booking.overtimed_confirmation.update_all!(status: "expired")
-  # end
-  #
-  # def current_position
-  #   ids_list = Booking.confirmed
-  #                     .map(&:user_id) # :pluck
-  #                     .index(self.user_id) + 1
-  # end
+    Booking.start_between(start, finish)
+           .or(end_between(start, finish))
+           .or(
+            where(arel[:start].lt(start))
+            .where(arel[:end_day].gt(finish))
+           )
+  end
 
   def self.to_csv
-    attr = %w{ id creation_date status pending_reconfirmation }
+    attr = %w{ id creation_date status pfinish_reconfirmation }
 
     CSV.generate(headers: true) do |csv|
       csv << attr
@@ -62,15 +29,6 @@ class Booking < ApplicationRecord
       end
     end
   end
-
-  # accept an existing booking if there is a spot left
-  # def accept!
-  #   if Booking.accepted.count < 20
-  #     self.update!(status: 'accepted')
-  #   else
-  #     puts 'Can not accept this booking, the list is full.'
-  #   end
-  # end
 
   private
 

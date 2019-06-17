@@ -3,17 +3,12 @@
     <h1>Manage your bookings</h1>
   </div>
     <table class="lists-cntnr">
-      <tr>
-        <th>Room name</th>
-        <th>Start date</th>
-        <th>End date</th>
-        <th>Manage</th>
-      </tr>
-      <% @bookings.each_with_index do |booking| %>
+      <%= render 'layouts/orderer', columns: @columns %>
+      <% @bookings.all.each do |booking| %>
         <tr>
           <td><%= booking.room.name %></td>
-          <td><%= booking.start %></td>
-          <td><%= booking.end_day %></td>
+          <td><%= booking.start.strftime("%B %d, %Y") %></td>
+          <td><%= booking.end_day.strftime("%B %d, %Y") %></td>
           <td><%= link_to image_pack_tag('rubbish-bin.png'), booking, method: :delete %></td>
         </tr>
       <% end %>

@@ -3,9 +3,22 @@ class BookingsController < ApplicationController
   before_action :authenticate_user!
   before_action :set_user
   before_action :set_booking, only: [:destroy]
+  include ApplicationHelper
 
   def index
-    @bookings = Booking.all
+    @bookings = Booking.sort_by(params[:column], params[:direction]).includes(:room)
+    @columns = {'name':'Name', 'start':'Start', 'end_day':'End'}
+  end
+
+  # Download a CSV list of the bookings
+  def download
+    @csv_list = Booking.order(:status)
+    authorize @csv_list
+
+    respond_to do |format|
+      format.html
+      format.csv { send_data @csv_list.to_csv, filename: "users-#{Date.today}.csv" }
+    end
   end
 
   def create
@@ -23,7 +36,7 @@ class BookingsController < ApplicationController
       flash[:notice] = "Bookings successfully created"
       redirect_to action: "index"
     rescue => e
-      puts "BOOKING CREATION ERROR : #{e}"
+      puts "BOOKING CREATION ERROR : #{e}" if Rails.env.production?
       flash[:alert] = "Error while creating a new booking"
       redirect_back(fallback_location: root_path)
     end
@@ -38,17 +51,6 @@ class BookingsController < ApplicationController
     redirect_back(fallback_location: root_path)
   end
 
-  # Download a CSV list of the bookings
-  def download
-    @csv_list = Booking.order(:status)
-    authorize @csv_list
-
-    respond_to do |format|
-      format.html
-      format.csv { send_data @csv_list.to_csv, filename: "users-#{Date.today}.csv" }
-    end
-  end
-
   private
 
   def set_user
@@ -56,7 +58,7 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking).permit(:start, :end_day, :status, :user_id, :room_ids => {})
+    params.require(:booking).permit(:start, :column, :end_day, :status, :user_id, :room_ids => {})
   end
 
   def set_booking

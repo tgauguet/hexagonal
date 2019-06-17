@@ -32,4 +32,4 @@ flatpickr('#datepicker', {
 Rails.start()
 Turbolinks.start()
 
-console.log('Hello World from Webpacker')
+// console.log('Hello World from Webpacker')
