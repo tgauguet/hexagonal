@@ -1,6 +1,8 @@
 <div class="signup-form-cntnr">
   <h2>New request</h2>
-  <p>Fill this form to proceed a coworking space request</p>
+  <br>
+  <%= link_to "🐙 Sign up with Github", user_github_omniauth_authorize_path, class: "github-btn" %>
+  <br><br>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= render "devise/shared/error_messages", resource: resource %>
 

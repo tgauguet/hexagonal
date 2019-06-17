@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :rooms, only: [:index]
-  devise_for :users, controllers: { registrations: 'registrations', confirmations: 'confirmations' }
+  devise_for :users, controllers: { registrations: 'registrations', confirmations: 'confirmations', omniauth_callbacks: 'callbacks' }
   resources :bookings, only: [:destroy, :index, :create]
   match '/bookings/download', to: 'bookings#download', via: :get
   match '/bookings/accept', to: "bookings#accept", via: :post

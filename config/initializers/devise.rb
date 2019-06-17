@@ -18,6 +18,7 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
+  config.omniauth :github, 'ab992321178d64088664', '4a5f09fa6310393024eaa7e26efec17ab5c60f4d', scope: 'user:email'
   config.mailer_sender = 'hexagoworking@gmail.com'
 
   # Configure the class responsible to send e-mails.

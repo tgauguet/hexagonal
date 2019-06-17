@@ -16,6 +16,7 @@ gem 'webpacker', '~> 4.0'
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
+gem 'omniauth-github'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
