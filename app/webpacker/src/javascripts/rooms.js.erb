@@ -3,14 +3,18 @@ const url = new URL(window.location.href);
 if (url && url.searchParams) {
   const beginParam = url.searchParams.get("begin");
   const endParam = url.searchParams.get("end");
+  const startDiv = document.querySelector(".start");
+  const endDiv = document.querySelector(".end")
 
-  document.querySelector(".start").value = beginParam
-  document.querySelector(".end").value = endParam
-  if (!beginParam || !endParam) {
-    inputs = document.querySelectorAll("input[type='checkbox']")
+  if (startDiv && endDiv) {
+    startDiv.value = beginParam
+    endDiv.value = endParam
+    if (!beginParam || !endParam) {
+      inputs = document.querySelectorAll("input[type='checkbox']")
 
-    for(var i = 0; i < inputs.length; i++) {
-      inputs[i].disabled = true;
+      for(var i = 0; i < inputs.length; i++) {
+        inputs[i].disabled = true;
+      }
     }
   }
 }

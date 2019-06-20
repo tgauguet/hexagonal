@@ -1,5 +1,39 @@
 <div class="user-dashboard">
-  <%= image_pack_tag 'download.png' %>
-  <h2>Download the waiting list</h2>
-  <%= link_to 'DOWNLOAD IN CSV', bookings_download_path(format: "csv") %>
+  <div class="sum-cntnr">
+    <h2>You have <%= @user.bookings.count %> bookings !</h2>
+  </div>
+  <div class="top-cntnr">
+    <div class="board-cntnr">
+      <h2>Select your home address</h2>
+      <%= image_pack_tag 'map.png' %>
+      <%= form_with url: search_address_path, id: 'addressSearch' do |f| %>
+        <%= f.text_field :address, placeholder: 'Address & city', id: 'addressField' %>
+      <% end %>
+      <%= form_for @user, method: :put do |f| %>
+        <div id='addressResults'>
+        </div>
+      <% end %>
+    </div>
+    <div class="board-cntnr">
+      <h2>Receive the booking list</h2>
+      <%= image_pack_tag 'download.png' %>
+      <%= link_to '📩 RECEIVE IN CSV', bookings_download_path(format: "csv") %>
+      <%= link_to '📩 RECEIVE IN XLSX', bookings_download_path(format: "xlsx") %>
+      <br><br>
+    </div>
+  </div>
+  <% if @user.address %>
+    <div class="address-cntnr">
+      <img src="https://maps.googleapis.com/maps/api/staticmap?
+        center=<%= @user.longitude %>,<%= @user.latitude %>
+        &zoom=5
+        &scale=2
+        &size=580x80
+        &maptype=terrain
+        &key=AIzaSyDDqCmr8dvqlb8sxnGXZAdIk8CVWci5EBA
+        &format=png
+        &visual_refresh=true
+        &markers=size:tiny%7Ccolor:0x0061ff%7Clabel:%7C<%= @user.longitude %>,<%= @user.latitude %>"/>
+    </div>
+  <% end %>
 </div>

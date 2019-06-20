@@ -1,5 +1,5 @@
 class Booking < ApplicationRecord
-  belongs_to :user, dependent: :destroy
+  belongs_to :user
   belongs_to :room
   validates_presence_of :user_id, :start, :end_day, :room_id, on: :create
 
@@ -19,7 +19,7 @@ class Booking < ApplicationRecord
   end
 
   def self.to_csv
-    attr = %w{ id creation_date status pfinish_reconfirmation }
+    attr = %w{ id creation_date status }
 
     CSV.generate(headers: true) do |csv|
       csv << attr

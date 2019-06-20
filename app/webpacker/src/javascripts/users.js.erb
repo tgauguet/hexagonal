@@ -1,0 +1,29 @@
+$('#addressField').on('input',(event) => {
+  if($('#addressField').val().length > 1) {
+    $.ajax({
+        url: $('#addressSearch').attr('action'),
+        type: 'POST',
+        data : $('#addressSearch').serialize(),
+        success: function(res){
+          if (res['features'].length) {
+            $('#addressResults').html("");
+            $(res['features']).each((key, val) => {
+              console.log(JSON.stringify(val['properties']))
+              $('#addressResults').append(`
+                <p>
+                  <input name="user[latitude]" type="hidden" value="${val['geometry']['coordinates'][0]}">
+                  <input name="user[longitude]" type="hidden" value="${val['geometry']['coordinates'][1]}">
+                  <input name="user[address]" type="hidden" value="${val['properties']['name']}">
+                  <input name="user[postal]" type="hidden" value="${val['properties']['postcode']}">
+                  <input name="user[city]" type="hidden" value="${val['properties']['city']}">
+                  ${val['properties']['label']}
+                  <input type='submit' value='💾' />
+                </p>
+                `)
+            });
+          }
+        }
+      });
+      return false;
+  }
+});

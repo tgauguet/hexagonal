@@ -11,9 +11,12 @@ gem 'pg'
 gem 'devise'
 # Use webpacker
 gem "pundit"
+gem 'rest-client'
 gem 'webpacker', '~> 4.0'
 # Use faker to generate fake data
 gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
+gem 'axlsx_rails'
+gem 'sidekiq'
 # Use Puma as the app server
 gem 'puma', '~> 3.11'
 gem 'omniauth-github'

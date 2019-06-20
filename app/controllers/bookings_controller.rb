@@ -1,8 +1,8 @@
 class BookingsController < ApplicationController
-  require 'csv'
   before_action :authenticate_user!
   before_action :set_user
   before_action :set_booking, only: [:destroy]
+  before_action :set_bookings, only: [:download, :send_file]
   include ApplicationHelper
 
   def index
@@ -12,13 +12,14 @@ class BookingsController < ApplicationController
 
   # Download a CSV list of the bookings
   def download
-    @csv_list = Booking.order(:status)
-    authorize @csv_list
+    authorize @bookings
 
-    respond_to do |format|
-      format.html
-      format.csv { send_data @csv_list.to_csv, filename: "users-#{Date.today}.csv" }
-    end
+    BookingsWorker.perform_async(@user.email, params['format'])
+    flash[:notice] = "🎉🎉🎉 We just sent you the booking list in #{params['format']}"
+    redirect_back(fallback_location: root_path)
+  end
+
+  def list
   end
 
   def create
@@ -36,18 +37,21 @@ class BookingsController < ApplicationController
       flash[:notice] = "Bookings successfully created"
       redirect_to action: "index"
     rescue => e
-      puts "BOOKING CREATION ERROR : #{e}" if Rails.env.production?
+      puts "ERROR IN BookingsController METHOD create :\n#{e}" if Rails.env.production?
       flash[:alert] = "Error while creating a new booking"
       redirect_back(fallback_location: root_path)
     end
   end
 
   def destroy
-    if @booking.destroy
+    begin
+      @booking.destroy!
       flash[:notice] = 'Booking has been successfully destroyed'
-    else
-      flash[:notice] = 'Error while destroying the booking'
+    rescue => e
+      puts "ERROR IN BookingsController METHOD destroy :\n#{e}"
+      flash[:alert] = 'Error while destroying the booking'
     end
+
     redirect_back(fallback_location: root_path)
   end
 
@@ -63,6 +67,10 @@ class BookingsController < ApplicationController
 
   def set_booking
     @booking = Booking.find(params[:id])
+  end
+
+  def set_bookings
+    @bookings = Booking.all
   end
 
 end

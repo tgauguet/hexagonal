@@ -28,6 +28,8 @@ On dev:
 ```
 rails s
 ruby ./bin/webpack-dev-server
+bundle exec sidekiq -q default -q mailers
+redis-server
 ```
 
 ### Prerequisites

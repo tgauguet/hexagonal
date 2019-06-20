@@ -1,19 +1,76 @@
 .user-dashboard {
   text-align: center;
-  padding-top: 4em;
+  padding: 2em 4em;
 
-  img{
-    width: 12em;
-    display: block;
-    margin: auto;
-    margin-bottom: 2em;
-  }
-  h2{
-    margin-bottom: 1em;
-  }
-  a{
-    background: $secondary;
-    color: white;
+  .sum-cntnr {
+    border: 1px solid $grey;
+    border-radius: .3em;
+    margin: 1em;
     padding: 1em;
+  }
+
+  .top-cntnr {
+    display: flex;
+
+    .board-cntnr{
+      flex: 2;
+      margin: 1em;
+      border: 1px solid $grey;
+      border-radius: .3em;
+      padding: 1em;
+
+      input[type='text'] {
+        border: 0px;
+        -webkit-appearance: none;
+        outline: none;
+        width: 80%;
+      }
+      #addressResults {
+        margin: .7em;
+
+        p {
+          border: 1px solid $grey;
+          border-bottom: 0;
+          margin: 0;
+          padding: .6em;
+          text-align: left;
+          position: relative;
+
+          input[type='submit'] {
+            background: $light-grey;
+            border: 0;
+            border-left: 1px solid $grey;
+            position: absolute;right: 0;
+            top: 0;
+            bottom:0;
+            width: 2.7em;
+          }
+        }
+        p:last-of-type {
+          border-bottom: 1px solid $grey;
+        }
+      }
+      img{
+        width: 7em;
+        display: block;
+        margin: auto;
+        margin-bottom: 2em;
+      }
+      h2{
+        margin: .1em;
+        font-size: 1.4em;
+      }
+      a{
+        background: $secondary;
+        color: white;
+        padding: 1em;
+      }
+    }
+  }
+  .address-cntnr {
+    border: 1px solid $grey;
+    border-radius: .3em;
+    margin: 1em;
+    overflow: hidden;
   }
 }

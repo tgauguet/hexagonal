@@ -2,10 +2,11 @@ class User < ApplicationRecord
   has_many :bookings, dependent: :destroy
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable, :omniauthable
-
   validates_presence_of :name # removed for omniauth compliancy , :bio, :phone_number
-  validates_length_of :bio, minimum: 50
-  validates :phone_number, length: { minimum: 10, maximum: 15 }
+  validates_length_of :bio, minimum: 50, unless: :skip_bio_validation
+  validates :phone_number, length: { minimum: 10, maximum: 15 }, unless: :skip_phone_number_validation
+  
+  attr_accessor :skip_bio_validation, :skip_phone_number_validation
 
   def admin?
     self.admin
