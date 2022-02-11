@@ -18,7 +18,7 @@ gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
 gem 'axlsx_rails'
 gem 'sidekiq'
 # Use Puma as the app server
-gem 'puma', '~> 3.11'
+gem 'puma', '~> 4.3'
 gem 'omniauth-github'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
